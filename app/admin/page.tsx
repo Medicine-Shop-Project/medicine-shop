@@ -86,6 +86,17 @@ export default function AdminPage() {
                     </span>
                   </td>
                 </tr>
+
+                <tr>
+                  <td className="px-6 py-4 whitespace-nowrap text-black">#ORD-003</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-black">Badhon Krisna Haldar</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-black">৳360</td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                      Completed
+                    </span>
+                  </td>
+                </tr>
                 </tbody>
               </table>
             </div>
