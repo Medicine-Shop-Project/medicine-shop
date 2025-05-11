@@ -9,7 +9,8 @@ import {
     ClipboardList,
     Settings,
     Menu,
-    X
+    X,
+    LogOut, // 🔴 Logout icon added
 } from "lucide-react";
 
 interface AdminLayoutProps {
@@ -52,7 +53,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                         </li>
                         <li>
                             <Link
-                                href="/admin/users"
+                                href="/admin/user"
                                 className="flex items-center p-2 text-gray-700 hover:bg-blue-50 rounded-lg"
                             >
                                 <Users className="mr-3 h-5 w-5" />
@@ -75,6 +76,16 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                             >
                                 <Settings className="mr-3 h-5 w-5" />
                                 Settings
+                            </Link>
+                        </li>
+                        {/* 🔽 Logout option */}
+                        <li>
+                            <Link
+                                href="/"
+                                className="flex items-center p-2 text-gray-700 hover:bg-red-50 rounded-lg"
+                            >
+                                <LogOut className="mr-3 h-5 w-5 text-red-500" />
+                                Logout
                             </Link>
                         </li>
                     </ul>

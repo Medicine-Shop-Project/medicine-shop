@@ -3,6 +3,7 @@
 
 import { useState } from "react";
 import AdminLayout from "../components/AdminLayout";
+
 import {
     Search,
     Plus,
@@ -60,7 +61,7 @@ export default function InventoryPage() {
                         <input
                             type="text"
                             placeholder="Search medicines..."
-                            className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            className="text-black w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                         />
                         <Search className="h-5 w-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
                     </div>
@@ -188,70 +189,105 @@ function ExpiryDate({ date }: { date: string }) {
 
 function AddMedicineModal({ onClose }: { onClose: () => void }) {
     return (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
-            <div className="bg-white rounded-lg p-6 w-full max-w-lg">
-                <h2 className="text-black  text-xl font-bold mb-4">Add New Medicine</h2>
-                <form className="space-y-4">
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700">Medicine Name</label>
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 backdrop-blur-sm flex items-center justify-center">
+            <div className="bg-white rounded-xl p-8 w-full max-w-lg shadow-2xl transform transition-all">
+                <div className="flex items-center gap-3 mb-6">
+                    <div className="bg-blue-100 p-2 rounded-lg">
+                        <Plus className="h-6 w-6 text-blue-600" />
+                    </div>
+                    <h2 className="text-2xl font-bold text-gray-800">Add New Medicine</h2>
+                </div>
+
+                <form className="space-y-6">
+                    <div className="space-y-1">
+                        <label className="block text-sm font-semibold text-gray-700">Medicine Name</label>
                         <input
                             type="text"
-                            className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                            placeholder="Enter medicine name"
+                            className="text-black mt-1 block w-full rounded-lg border border-gray-200 px-4 py-3
+                            shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
                         />
                     </div>
-                    <div className="grid grid-cols-2 gap-4">
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700">Category</label>
-                            <select className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+
+                    <div className="grid grid-cols-2 gap-6">
+                        <div className="space-y-1">
+                            <label className="block text-sm font-semibold text-gray-700">Category</label>
+                            <select
+                                className="text-black mt-1 block w-full rounded-lg border border-gray-200 px-4 py-3
+                                shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all
+                                bg-white"
+                            >
+                                <option value="">Select category</option>
                                 <option>Pain Relief</option>
                                 <option>Antibiotics</option>
                                 <option>Cardiovascular</option>
                                 <option>Vitamins</option>
                             </select>
                         </div>
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700">Manufacturer</label>
+                        <div className="space-y-1">
+                            <label className="block text-sm font-semibold text-gray-700">Manufacturer</label>
                             <input
                                 type="text"
-                                className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                placeholder="Enter manufacturer"
+                                className="text-black mt-1 block w-full rounded-lg border border-gray-200 px-4 py-3
+                                shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
                             />
                         </div>
                     </div>
-                    <div className="grid grid-cols-3 gap-4">
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700">Stock</label>
-                            <input
-                                type="number"
-                                className="text-black  mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                            />
+
+                    <div className="grid grid-cols-3 gap-6">
+                        <div className="space-y-1">
+                            <label className="block text-sm font-semibold text-gray-700">Stock</label>
+                            <div className="relative">
+                                <input
+                                    type="number"
+                                    min="0"
+                                    placeholder="0"
+                                    className="text-black mt-1 block w-full rounded-lg border border-gray-200 px-4 py-3
+                                    shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
+                                />
+                                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">
+                                    units
+                                </span>
+                            </div>
                         </div>
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700">Price (₹)</label>
-                            <input
-                                type="number"
-                                step="0.01"
-                                className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                            />
+                        <div className="space-y-1">
+                            <label className="block text-sm font-semibold text-gray-700">Price (₹)</label>
+                            <div className="relative">
+                                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">₹</span>
+                                <input
+                                    type="number"
+                                    step="0.01"
+                                    min="0"
+                                    placeholder="0.00"
+                                    className="text-black mt-1 block w-full rounded-lg border border-gray-200 pl-8 pr-4 py-3
+                                    shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
+                                />
+                            </div>
                         </div>
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700">Expiry Date</label>
+                        <div className="space-y-1">
+                            <label className="block text-sm font-semibold text-gray-700">Expiry Date</label>
                             <input
                                 type="date"
-                                className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                className="text-black mt-1 block w-full rounded-lg border border-gray-200 px-4 py-3
+                                shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
                             />
                         </div>
                     </div>
-                    <div className="flex justify-end gap-4 mt-6">
+
+                    <div className="flex justify-end gap-4 mt-8 pt-4 border-t">
                         <button
                             type="button"
                             onClick={onClose}
-                            className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md"
+                            className="px-6 py-2.5 text-sm font-medium text-gray-700 bg-gray-50 hover:bg-gray-100
+                            rounded-lg border border-gray-200 transition-colors duration-200"
                         >
                             Cancel
                         </button>
                         <button
                             type="submit"
-                            className="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md"
+                            className="px-6 py-2.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700
+                            rounded-lg shadow-sm hover:shadow-md transition-all duration-200"
                         >
                             Add Medicine
                         </button>
