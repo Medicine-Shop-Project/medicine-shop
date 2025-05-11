@@ -3,9 +3,19 @@
 import AdminLayout from "../components/AdminLayout";
 import { ClipboardList } from "lucide-react";
 
+// Define types
+type OrderStatus = 'Completed' | 'Pending' | 'Refunded';
+
+interface Order {
+    id: string;
+    customer: string;
+    amount: string; // Or number if appropriate
+    status: OrderStatus;
+}
+
 export default function OrdersPage() {
-    // Mock order data
-    const orders = [
+    // Mock order data (typed)
+    const orders: Order[] = [
         {
             id: "#ORD-001",
             customer: "John Doe",
@@ -26,14 +36,14 @@ export default function OrdersPage() {
         },
     ];
 
-    // Color status mapping
-    const statusColor = {
+    // Color status mapping (typed)
+    const statusColor: Record<OrderStatus, string> = {
         Completed: "bg-green-100 text-green-800",
         Pending: "bg-yellow-100 text-yellow-800",
         Refunded: "bg-red-100 text-red-800",
     };
 
-    // @ts-ignore
+    // No @ts-ignore needed now
     return (
         <AdminLayout>
             <div className="bg-white rounded-lg shadow p-6">
@@ -58,11 +68,14 @@ export default function OrdersPage() {
                                 <td className="px-6 py-4 whitespace-nowrap text-black">{order.customer}</td>
                                 <td className="px-6 py-4 whitespace-nowrap text-black">{order.amount}</td>
                                 <td className="px-6 py-4 whitespace-nowrap">
-                    <span
-                        className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusColor[order.status] || "bg-gray-100 text-gray-700"}`}
-                    >
-                      {order.status}
-                    </span>
+                                    <span
+                                        // TypeScript now knows order.status is a valid key for statusColor
+                                        className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                                            statusColor[order.status] || "bg-gray-100 text-gray-700"
+                                        }`}
+                                    >
+                                      {order.status}
+                                    </span>
                                 </td>
                             </tr>
                         ))}
