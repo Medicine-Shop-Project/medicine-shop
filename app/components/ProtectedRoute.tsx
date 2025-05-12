@@ -1,9 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, ReactNode } from "react";
 import { useRouter } from "next/navigation";
 
-const ProtectedRoute = ({ children, allowedRoles }) => {
+interface ProtectedRouteProps {
+    children: ReactNode;
+    allowedRoles?: string[]; // Optional array of allowed roles
+}
+
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, allowedRoles }) => {
     const router = useRouter();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
@@ -16,6 +21,15 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
             setIsLoading(false);
             return;
         }
+
+        // You might want to add logic here to check if the user's role
+        // matches the allowedRoles, if provided. For example:
+        // const userRole = localStorage.getItem("userRole");
+        // if (allowedRoles && !allowedRoles.includes(userRole)) {
+        //   router.push("/unauthorized"); // Redirect to an unauthorized page
+        //   setIsLoading(false);
+        //   return;
+        // }
 
         setIsAuthenticated(true);
         setIsLoading(false);
